@@ -10,7 +10,7 @@
 ```
 
 ## SpringFirst
-入门案例开发步骤
+### 1. 入门案例开发步骤
 1. 引入Spring相关依赖，为了方便测试，同时引入JUnit依赖
     ```xml
     <dependencies>
@@ -44,3 +44,28 @@
     <bean id="user" class="com.atguigu.spring6.User"/>
     ```
 5. 进行测试
+
+
+### 2. 入门案例程序分析
+#### 2.1 通过反射创建对象
+在案例中，并不是通过new创建对象，而是通过反射机制创建User对象。
+
+#### 2.2 如何通过反射创建对象？
+1. 加载bean.xml文件
+2. 对xml文件进行解析 (dom4j解析xml文件，从而获得class的属性值和类的全名称)
+3. 获取xml文件中bean标签的属性，本例子中的id & class
+4. 使用反射，根据类的全路径创建对象
+
+Sample: `test/java/com.atguigu.spring6.UserTest.testCreateUserObjectByReflection()`
+
+#### 2.3 创建的对象是如何存储的？
+bean对象最终存储在spring容器中，在spring源码底层就是一个map集合，存储bean的map在`DefaultListableBeanFactory`类中：
+
+```java
+private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
+```
+
+Spring容器加载到Bean类时 , 会把这个类的描述信息, 以包名加类名的方式存到beanDefinitionMap中,
+`Map<String,BeanDefinition>`
+* 其中`String`是Key, 默认是类名首字母小写;
+* `BeanDefinition`, 存的是类的定义(描述信息),我们通常叫BeanDefinition接口为:bean的定义对象。
