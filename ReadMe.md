@@ -69,3 +69,37 @@ Spring容器加载到Bean类时 , 会把这个类的描述信息, 以包名加�
 `Map<String,BeanDefinition>`
 * 其中`String`是Key, 默认是类名首字母小写;
 * `BeanDefinition`, 存的是类的定义(描述信息),我们通常叫BeanDefinition接口为:bean的定义对象。
+
+
+### 3. 启用`Log4j2`日志框架 + 使用Lombok
+#### 3.1 添加Log4j2依赖
+```xml
+<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-core</artifactId>
+    <version>2.20.0</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j2-impl -->
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-slf4j2-impl</artifactId>
+    <version>2.20.0</version>
+    <scope>test</scope>
+</dependency>
+```
+
+#### 3.2 添加Lombok依赖
+```xml
+<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+<dependency>
+   <groupId>org.projectlombok</groupId>
+   <artifactId>lombok</artifactId>
+   <version>1.18.28</version>
+   <scope>provided</scope>
+</dependency>
+```
+
+## Reference
+* https://docs.spring.io/spring-framework/reference/
+* https://projectlombok.org/
